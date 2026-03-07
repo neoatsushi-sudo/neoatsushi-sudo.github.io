@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>売上グラフ自動生成ツール</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: #0f1117;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #fff; margin-bottom: 8px; }
+    .subtitle { color: #8892a4; font-size: 0.9rem; margin-bottom: 36px; }
+    .back-link {
+      display: inline-block;
+      color: #5ba3f5;
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .card {
+      background: #1a1f2e;
+      border: 1px solid #2a2f3e;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 0.95rem;
+      color: #5ba3f5;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 7px 18px;
+      border-radius: 6px;
+      border: 1px solid #2a2f3e;
+      background: none;
+      color: #8892a4;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+    .tab.active {
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border-color: #2a5a9f;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* CSV アップロード */
+    .upload-area {
+      border: 2px dashed #2a2f3e;
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .upload-area:hover { border-color: #5ba3f5; }
+    .upload-area p { color: #8892a4; font-size: 0.9rem; margin-top: 10px; }
+    .upload-area .icon { font-size: 2.5rem; }
+    #csvFile { display: none; }
+
+    .csv-hint {
+      margin-top: 14px;
+      background: #0f1117;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      color: #8892a4;
+    }
+    .csv-hint code {
+      background: #1a1f2e;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #5ba3f5;
+    }
+
+    /* 手入力 */
+    .manual-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+    input, select {
+      background: #0f1117;
+      border: 1px solid #2a2f3e;
+      border-radius: 6px;
+      color: #e0e0e0;
+      padding: 9px 12px;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+      width: 100%;
+    }
+    input:focus, select:focus { border-color: #5ba3f5; }
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px 8px;
+    }
+    .btn-add-row {
+      margin-top: 8px;
+      background: none;
+      border: 1px dashed #2a2f3e;
+      color: #5ba3f5;
+      border-radius: 6px;
+      padding: 7px 18px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .btn-add-row:hover { border-color: #5ba3f5; }
+
+    /* グラフ設定 */
+    .settings-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 0.82rem; color: #8892a4; }
+
+    /* ボタン */
+    .btn-generate {
+      width: 100%;
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border: 1px solid #2a5a9f;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 20px;
+    }
+    .btn-generate:hover { background: #2a4a7f; }
+
+    /* グラフ表示 */
+    .chart-container {
+      display: none;
+      background: #1a1f2e;
+      border: 1px solid #2a2f3e;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .chart-container.visible { display: block; }
+    .chart-wrapper { position: relative; height: 350px; }
+    .btn-download {
+      margin-top: 16px;
+      background: #0f2a1a;
+      color: #4caf82;
+      border: 1px solid #1a4a2a;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #1a3a2a; }
+
+    @media (max-width: 520px) {
+      .settings-row { grid-template-columns: 1fr; }
+      .manual-row { grid-template-columns: 1fr 1fr auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← ポートフォリオに戻る</a>
+  <h1>売上グラフ自動生成ツール</h1>
+  <p class="subtitle">データを入力またはCSVをアップロードして売上グラフを自動作成します。</p>
+
+  <!-- データ入力 -->
+  <div class="card">
+    <h2>データ入力</h2>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('manual')">手入力</button>
+      <button class="tab" onclick="switchTab('csv')">CSVアップロード</button>
+    </div>
+
+    <!-- 手入力 -->
+    <div id="tab-manual" class="tab-content active">
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-bottom:6px;">
+        <span style="font-size:0.78rem;color:#8892a4;padding:0 4px;">期間（月・日付など）</span>
+        <span style="font-size:0.78rem;color:#8892a4;padding:0 4px;">売上金額（円）</span>
+        <span></span>
+      </div>
+      <div id="manualRows">
+        <div class="manual-row">
+          <input type="text" class="row-label" placeholder="例: 1月">
+          <input type="number" class="row-value" placeholder="例: 120000" min="0">
+          <button class="btn-remove" onclick="removeManualRow(this)">✕</button>
+        </div>
+        <div class="manual-row">
+          <input type="text" class="row-label" placeholder="例: 2月">
+          <input type="number" class="row-value" placeholder="例: 150000" min="0">
+          <button class="btn-remove" onclick="removeManualRow(this)">✕</button>
+        </div>
+        <div class="manual-row">
+          <input type="text" class="row-label" placeholder="例: 3月">
+          <input type="number" class="row-value" placeholder="例: 180000" min="0">
+          <button class="btn-remove" onclick="removeManualRow(this)">✕</button>
+        </div>
+      </div>
+      <button class="btn-add-row" onclick="addManualRow()">＋ 行を追加</button>
+    </div>
+
+    <!-- CSVアップロード -->
+    <div id="tab-csv" class="tab-content">
+      <div class="upload-area" onclick="document.getElementById('csvFile').click()">
+        <div class="icon">&#128196;</div>
+        <p>クリックしてCSVファイルを選択</p>
+        <p style="font-size:0.8rem;margin-top:4px;">または ドラッグ＆ドロップ</p>
+      </div>
+      <input type="file" id="csvFile" accept=".csv" onchange="loadCSV(event)">
+      <div class="csv-hint">
+        CSVフォーマット例：<br>
+        <code>期間,売上</code><br>
+        <code>1月,120000</code><br>
+        <code>2月,150000</code>
+      </div>
+      <div id="csvPreview" style="margin-top:12px;font-size:0.85rem;color:#4caf82;"></div>
+    </div>
+  </div>
+
+  <!-- グラフ設定 -->
+  <div class="card">
+    <h2>グラフ設定</h2>
+    <div class="settings-row">
+      <div class="form-group">
+        <label>グラフタイトル</label>
+        <input type="text" id="chartTitle" placeholder="例: 2026年 月別売上">
+      </div>
+      <div class="form-group">
+        <label>グラフの種類</label>
+        <select id="chartType">
+          <option value="bar">棒グラフ</option>
+          <option value="line">折れ線グラフ</option>
+          <option value="bar-line">棒＋折れ線（複合）</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="generateChart()">グラフを生成</button>
+
+  <!-- グラフ表示 -->
+  <div class="chart-container" id="chartContainer">
+    <div class="chart-wrapper">
+      <canvas id="myChart"></canvas>
+    </div>
+    <button class="btn-download" onclick="downloadChart()">画像としてダウンロード（PNG）</button>
+  </div>
+</div>
+
+<script>
+  let currentTab = 'manual';
+  let csvData = null;
+  let myChart = null;
+
+  function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+
+  function addManualRow() {
+    const container = document.getElementById('manualRows');
+    const div = document.createElement('div');
+    div.className = 'manual-row';
+    div.innerHTML = `
+      <input type="text" class="row-label" placeholder="期間">
+      <input type="number" class="row-value" placeholder="金額" min="0">
+      <button class="btn-remove" onclick="removeManualRow(this)">✕</button>`;
+    container.appendChild(div);
+  }
+
+  function removeManualRow(btn) {
+    const rows = document.querySelectorAll('#manualRows .manual-row');
+    if (rows.length > 1) btn.closest('.manual-row').remove();
+  }
+
+  function loadCSV(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const lines = e.target.result.trim().split('\n');
+      csvData = { labels: [], values: [] };
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        if (parts.length >= 2) {
+          csvData.labels.push(parts[0].trim());
+          csvData.values.push(parseFloat(parts[1].trim()) || 0);
+        }
+      }
+      document.getElementById('csvPreview').textContent =
+        `✓ 読み込み完了: ${csvData.labels.length}件のデータ`;
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function generateChart() {
+    let labels, values;
+
+    if (currentTab === 'manual') {
+      labels = []; values = [];
+      document.querySelectorAll('#manualRows .manual-row').forEach(row => {
+        const l = row.querySelector('.row-label').value.trim();
+        const v = parseFloat(row.querySelector('.row-value').value) || 0;
+        if (l) { labels.push(l); values.push(v); }
+      });
+    } else {
+      if (!csvData) { alert('CSVファイルを選択してください。'); return; }
+      labels = csvData.labels;
+      values = csvData.values;
+    }
+
+    if (labels.length === 0) { alert('データを入力してください。'); return; }
+
+    const title = document.getElementById('chartTitle').value || '売上グラフ';
+    const type = document.getElementById('chartType').value;
+
+    const container = document.getElementById('chartContainer');
+    container.classList.add('visible');
+
+    if (myChart) myChart.destroy();
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    let datasets;
+    if (type === 'bar-line') {
+      datasets = [
+        {
+          type: 'bar',
+          label: '売上（円）',
+          data: values,
+          backgroundColor: 'rgba(91,163,245,0.5)',
+          borderColor: '#5ba3f5',
+          borderWidth: 1,
+        },
+        {
+          type: 'line',
+          label: '推移',
+          data: values,
+          borderColor: '#4caf82',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          pointBackgroundColor: '#4caf82',
+          tension: 0.3,
+        }
+      ];
+    } else {
+      datasets = [{
+        label: '売上（円）',
+        data: values,
+        backgroundColor: type === 'line' ? 'rgba(91,163,245,0.15)' : 'rgba(91,163,245,0.6)',
+        borderColor: '#5ba3f5',
+        borderWidth: 2,
+        fill: type === 'line',
+        tension: 0.3,
+        pointBackgroundColor: '#5ba3f5',
+      }];
+    }
+
+    myChart = new Chart(ctx, {
+      type: type === 'bar-line' ? 'bar' : type,
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+            color: '#fff',
+            font: { size: 16 },
+            padding: { bottom: 20 },
+          },
+          legend: { labels: { color: '#8892a4' } },
+        },
+        scales: {
+          x: {
+            ticks: { color: '#8892a4' },
+            grid: { color: '#2a2f3e' },
+          },
+          y: {
+            ticks: {
+              color: '#8892a4',
+              callback: v => '¥' + v.toLocaleString(),
+            },
+            grid: { color: '#2a2f3e' },
+          },
+        },
+      },
+    });
+
+    container.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function downloadChart() {
+    const canvas = document.getElementById('myChart');
+    const link = document.createElement('a');
+    link.download = 'sales_chart.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+</script>
+</body>
+</html>
