@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>neoatsushi | IT効率化ツール制作</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: #0f1117;
+      color: #e0e0e0;
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(135deg, #1a1f2e, #0f1117);
+      border-bottom: 1px solid #2a2f3e;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+    header p {
+      color: #8892a4;
+      margin-top: 12px;
+      font-size: 1.05rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border: 1px solid #2a5a9f;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.82rem;
+      margin: 6px 4px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    section {
+      padding: 60px 0;
+    }
+    section h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2a2f3e;
+    }
+    .about-text {
+      color: #a0aab8;
+      font-size: 1rem;
+      max-width: 680px;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .tool-card {
+      background: #1a1f2e;
+      border: 1px solid #2a2f3e;
+      border-radius: 10px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tool-card:hover {
+      border-color: #5ba3f5;
+      transform: translateY(-3px);
+    }
+    .tool-card .icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .tool-card h3 {
+      color: #fff;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .tool-card p {
+      color: #8892a4;
+      font-size: 0.88rem;
+    }
+    .tool-card .tag {
+      display: inline-block;
+      background: #0f2a1a;
+      color: #4caf82;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      margin-top: 12px;
+    }
+    .tool-card .coming {
+      background: #2a1f0f;
+      color: #f5a623;
+    }
+    .contact {
+      background: #1a1f2e;
+      border-radius: 12px;
+      padding: 36px;
+      text-align: center;
+    }
+    .contact p {
+      color: #8892a4;
+      margin-bottom: 20px;
+    }
+    .contact a {
+      display: inline-block;
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border: 1px solid #2a5a9f;
+      border-radius: 8px;
+      padding: 10px 28px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      margin: 6px;
+      transition: background 0.2s;
+    }
+    .contact a:hover {
+      background: #2a4a7f;
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #3a4050;
+      font-size: 0.82rem;
+      border-top: 1px solid #1a1f2e;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>neoatsushi</h1>
+    <p>業務効率化ツール / Webアプリ / 自動化スクリプト</p>
+    <div style="margin-top:20px;">
+      <span class="badge">Python</span>
+      <span class="badge">GAS</span>
+      <span class="badge">HTML/CSS/JS</span>
+      <span class="badge">API連携</span>
+      <span class="badge">業務自動化</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <section>
+    <h2>About</h2>
+    <p class="about-text">
+      クラウドソーシングを中心に、中小企業・個人事業主の業務効率化をサポートしています。
+      面倒な繰り返し作業の自動化・データ整理・レポート生成など、
+      現場の課題をシンプルなツールで解決します。
+    </p>
+  </section>
+
+  <section>
+    <h2>Works</h2>
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <div class="icon">&#128196;</div>
+        <h3>請求書PDF自動生成ツール</h3>
+        <p>入力フォームに記入するだけで請求書PDFを自動生成。テンプレート変更にも対応。</p>
+        <span class="tag">公開中</span>
+      </div>
+
+      <div class="tool-card">
+        <div class="icon">&#128202;</div>
+        <h3>売上グラフ自動生成ツール</h3>
+        <p>CSVをアップロードするだけで売上推移グラフを自動作成・ダウンロード可能。</p>
+        <span class="tag">公開中</span>
+      </div>
+
+      <div class="tool-card">
+        <div class="icon">&#128172;</div>
+        <h3>議事録 → タスク変換ツール</h3>
+        <p>会議メモを貼り付けるとAIが自動でToDo一覧に整理。Notion出力にも対応。</p>
+        <span class="tag coming">制作中</span>
+      </div>
+
+      <div class="tool-card">
+        <div class="icon">&#128233;</div>
+        <h3>スプレッドシート一括メール送信</h3>
+        <p>顧客リストをもとに個別メールを自動送信。GASで完全無料運用。</p>
+        <span class="tag coming">制作中</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact">
+      <p>お仕事のご依頼・ご相談はクラウドソーシング各サイトからお気軽にどうぞ。</p>
+      <a href="#">クラウドワークス</a>
+      <a href="#">ランサーズ</a>
+      <a href="#">ココナラ</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2026 neoatsushi. All rights reserved.
+</footer>
+
+</body>
+</html>
