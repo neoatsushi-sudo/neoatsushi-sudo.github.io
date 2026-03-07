@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一括メール送信ツール</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+      background: #0f1117;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #fff; margin-bottom: 8px; }
+    .subtitle { color: #8892a4; font-size: 0.9rem; margin-bottom: 36px; }
+    .back-link {
+      display: inline-block;
+      color: #5ba3f5;
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .card {
+      background: #1a1f2e;
+      border: 1px solid #2a2f3e;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 0.95rem;
+      color: #5ba3f5;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .info-box {
+      background: #0f1a2e;
+      border: 1px solid #1e3a5f;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      color: #8892a4;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .info-box strong { color: #5ba3f5; }
+
+    /* CSV */
+    .upload-area {
+      border: 2px dashed #2a2f3e;
+      border-radius: 10px;
+      padding: 36px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .upload-area:hover { border-color: #5ba3f5; }
+    .upload-area .icon { font-size: 2.2rem; }
+    .upload-area p { color: #8892a4; font-size: 0.88rem; margin-top: 8px; }
+    #csvFile { display: none; }
+    .csv-hint {
+      margin-top: 14px;
+      background: #0f1117;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      color: #8892a4;
+      line-height: 1.8;
+    }
+    .csv-hint code {
+      background: #1a1f2e;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #5ba3f5;
+    }
+    .sample-btn {
+      margin-top: 10px;
+      background: none;
+      border: 1px dashed #2a2f3e;
+      color: #8892a4;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: all 0.2s;
+    }
+    .sample-btn:hover { border-color: #5ba3f5; color: #5ba3f5; }
+    #csvStatus { margin-top: 10px; font-size: 0.85rem; color: #4caf82; }
+
+    /* テンプレート */
+    input, textarea {
+      width: 100%;
+      background: #0f1117;
+      border: 1px solid #2a2f3e;
+      border-radius: 6px;
+      color: #e0e0e0;
+      padding: 9px 12px;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus { border-color: #5ba3f5; }
+    textarea { resize: vertical; min-height: 140px; line-height: 1.7; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    label { font-size: 0.82rem; color: #8892a4; }
+    .var-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+    .var-tag {
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border: none;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .var-tag:hover { background: #2a4a7f; }
+
+    /* ボタン */
+    .btn-generate {
+      width: 100%;
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border: 1px solid #2a5a9f;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 20px;
+    }
+    .btn-generate:hover { background: #2a4a7f; }
+
+    /* プレビュー */
+    .preview-container { display: none; }
+    .preview-container.visible { display: block; }
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .preview-header h2 {
+      font-size: 0.95rem;
+      color: #5ba3f5;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .btn-export-gas {
+      background: #0f2a1a;
+      color: #4caf82;
+      border: 1px solid #1a4a2a;
+      border-radius: 6px;
+      padding: 7px 16px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: background 0.2s;
+    }
+    .btn-export-gas:hover { background: #1a3a2a; }
+    .summary-bar {
+      font-size: 0.85rem;
+      color: #8892a4;
+      margin-bottom: 16px;
+    }
+    .summary-bar span { color: #e0e0e0; font-weight: bold; }
+    .mail-item {
+      background: #0f1117;
+      border: 1px solid #2a2f3e;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .mail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .mail-header:hover { background: #1a1f2e; }
+    .mail-to { font-size: 0.9rem; color: #e0e0e0; }
+    .mail-to strong { color: #5ba3f5; }
+    .mail-subject { font-size: 0.8rem; color: #8892a4; margin-top: 2px; }
+    .toggle-icon { color: #8892a4; font-size: 0.8rem; }
+    .mail-body {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid #2a2f3e;
+      font-size: 0.88rem;
+      color: #c0c8d8;
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+    .mail-body.open { display: block; }
+
+    /* GASコード */
+    .gas-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .gas-modal.open { display: flex; }
+    .gas-modal-inner {
+      background: #1a1f2e;
+      border: 1px solid #2a2f3e;
+      border-radius: 12px;
+      padding: 28px;
+      max-width: 660px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .gas-modal h3 { color: #fff; margin-bottom: 16px; }
+    .gas-modal pre {
+      background: #0f1117;
+      border: 1px solid #2a2f3e;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 0.78rem;
+      color: #a0c8ff;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.6;
+    }
+    .gas-steps {
+      font-size: 0.85rem;
+      color: #8892a4;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .gas-steps strong { color: #e0e0e0; }
+    .btn-close {
+      margin-top: 16px;
+      background: none;
+      border: 1px solid #2a2f3e;
+      color: #8892a4;
+      border-radius: 6px;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+    .btn-copy-code {
+      background: #1e3a5f;
+      color: #5ba3f5;
+      border: 1px solid #2a5a9f;
+      border-radius: 6px;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← ポートフォリオに戻る</a>
+  <h1>一括メール送信ツール</h1>
+  <p class="subtitle">顧客リストCSVとテンプレートからメールを自動生成。GASで実際の送信も可能です。</p>
+
+  <div class="info-box">
+    <strong>このツールの使い方：</strong><br>
+    ① CSVで顧客リストをアップロード<br>
+    ② 件名・本文テンプレートを作成（<code>{{名前}}</code> などで個別差し込み）<br>
+    ③ プレビューで内容確認<br>
+    ④ 「GASコードを出力」で実際の送信スクリプトを取得
+  </div>
+
+  <!-- CSVアップロード -->
+  <div class="card">
+    <h2>顧客リスト（CSV）</h2>
+    <div class="upload-area" onclick="document.getElementById('csvFile').click()">
+      <div class="icon">&#128196;</div>
+      <p>クリックしてCSVファイルを選択</p>
+    </div>
+    <input type="file" id="csvFile" accept=".csv" onchange="loadCSV(event)">
+    <div class="csv-hint">
+      CSVフォーマット（1行目はヘッダー）：<br>
+      <code>名前,メールアドレス,会社名,その他</code><br>
+      <code>田中太郎,tanaka@example.com,株式会社サンプル,VIP</code>
+    </div>
+    <button class="sample-btn" onclick="loadSampleCSV()">サンプルデータを使う</button>
+    <div id="csvStatus"></div>
+  </div>
+
+  <!-- テンプレート -->
+  <div class="card">
+    <h2>メールテンプレート</h2>
+    <div class="form-group">
+      <label>件名</label>
+      <input type="text" id="subject" placeholder="例: {{会社名}} {{名前}}様 サービスのご案内">
+    </div>
+    <div class="form-group">
+      <label>本文</label>
+      <textarea id="body" placeholder="例:&#10;{{名前}}様&#10;&#10;いつもお世話になっております。&#10;〇〇株式会社の田中でございます。&#10;&#10;この度は..."></textarea>
+      <div style="margin-top:8px;">
+        <div style="font-size:0.78rem;color:#8892a4;margin-bottom:6px;">変数を挿入（クリックでコピー）：</div>
+        <div class="var-tags" id="varTags"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="generatePreview()">プレビューを生成</button>
+
+  <!-- プレビュー -->
+  <div class="preview-container card" id="previewContainer">
+    <div class="preview-header">
+      <h2>送信プレビュー</h2>
+      <button class="btn-export-gas" onclick="showGAS()">GASコードを出力</button>
+    </div>
+    <div class="summary-bar">送信件数: <span id="mailCount">0</span> 件（クリックで本文を確認）</div>
+    <div id="mailList"></div>
+  </div>
+</div>
+
+<!-- GASモーダル -->
+<div class="gas-modal" id="gasModal">
+  <div class="gas-modal-inner">
+    <h3>Google Apps Script コード</h3>
+    <div class="gas-steps">
+      <strong>使い方：</strong><br>
+      1. Googleスプレッドシートを開く → 拡張機能 → Apps Script<br>
+      2. 下のコードを貼り付けて保存<br>
+      3. スプレッドシートに顧客リストを入力（A列:名前、B列:メール、C列:会社名）<br>
+      4. 関数 <code>sendBulkEmail</code> を実行
+    </div>
+    <pre id="gasCode"></pre>
+    <div style="margin-top:16px;">
+      <button class="btn-copy-code" onclick="copyGAS()">コードをコピー</button>
+      <button class="btn-close" onclick="document.getElementById('gasModal').classList.remove('open')">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let csvRows = [];
+  let headers = [];
+
+  const SAMPLE_CSV = `名前,メールアドレス,会社名,プラン
+田中太郎,tanaka@example.com,株式会社サンプル,スタンダード
+鈴木花子,suzuki@example.com,〇〇商事,プレミアム
+佐藤次郎,sato@example.com,△△工業,スタンダード`;
+
+  function loadSampleCSV() {
+    parseCSV(SAMPLE_CSV);
+    document.getElementById('subject').value = '{{会社名}} {{名前}}様 新サービスのご案内';
+    document.getElementById('body').value =
+`{{名前}}様
+
+いつもお世話になっております。
+〇〇株式会社の田中でございます。
+
+この度、{{プラン}}プランをご利用中のお客様へ
+新サービスのご案内をお送りしております。
+
+ご不明な点がございましたら、お気軽にご連絡ください。
+
+引き続きよろしくお願いいたします。
+
+──────────────
+田中 太郎
+〇〇株式会社
+TEL: 03-0000-0000
+──────────────`;
+  }
+
+  function loadCSV(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => parseCSV(e.target.result);
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    headers = lines[0].split(',').map(h => h.trim());
+    csvRows = [];
+    for (let i = 1; i < lines.length; i++) {
+      const vals = lines[i].split(',').map(v => v.trim());
+      if (vals.some(v => v)) {
+        const row = {};
+        headers.forEach((h, idx) => { row[h] = vals[idx] || ''; });
+        csvRows.push(row);
+      }
+    }
+    document.getElementById('csvStatus').textContent =
+      `✓ 読み込み完了: ${csvRows.length}件 / 列: ${headers.join(', ')}`;
+    renderVarTags();
+  }
+
+  function renderVarTags() {
+    const container = document.getElementById('varTags');
+    container.innerHTML = '';
+    headers.forEach(h => {
+      const btn = document.createElement('button');
+      btn.className = 'var-tag';
+      btn.textContent = '{{' + h + '}}';
+      btn.onclick = () => insertVar('{{' + h + '}}');
+      container.appendChild(btn);
+    });
+  }
+
+  function insertVar(v) {
+    navigator.clipboard.writeText(v).then(() => {
+      const body = document.getElementById('body');
+      const start = body.selectionStart;
+      const end = body.selectionEnd;
+      body.value = body.value.slice(0, start) + v + body.value.slice(end);
+      body.focus();
+      body.selectionStart = body.selectionEnd = start + v.length;
+    }).catch(() => {
+      alert(v + ' をコピーしました。貼り付けてください。');
+    });
+  }
+
+  function applyTemplate(template, row) {
+    return template.replace(/\{\{([^}]+)\}\}/g, (_, key) => row[key.trim()] || '');
+  }
+
+  function generatePreview() {
+    if (csvRows.length === 0) { alert('CSVデータを読み込んでください。'); return; }
+    const subject = document.getElementById('subject').value;
+    const body = document.getElementById('body').value;
+    if (!subject || !body) { alert('件名と本文を入力してください。'); return; }
+
+    const list = document.getElementById('mailList');
+    list.innerHTML = '';
+    document.getElementById('mailCount').textContent = csvRows.length;
+
+    csvRows.forEach((row, i) => {
+      const s = applyTemplate(subject, row);
+      const b = applyTemplate(body, row);
+      const emailKey = headers.find(h => /mail|email|メール/i.test(h)) || headers[1] || '';
+      const email = row[emailKey] || '（メールアドレスなし）';
+      const name = row[headers[0]] || '（名前なし）';
+
+      const div = document.createElement('div');
+      div.className = 'mail-item';
+      div.innerHTML = `
+        <div class="mail-header" onclick="toggleMail(${i})">
+          <div>
+            <div class="mail-to">宛先: <strong>${escHtml(name)}</strong> &lt;${escHtml(email)}&gt;</div>
+            <div class="mail-subject">件名: ${escHtml(s)}</div>
+          </div>
+          <span class="toggle-icon" id="icon-${i}">▼</span>
+        </div>
+        <div class="mail-body" id="body-${i}">${escHtml(b)}</div>`;
+      list.appendChild(div);
+    });
+
+    const container = document.getElementById('previewContainer');
+    container.classList.add('visible');
+    container.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function toggleMail(i) {
+    const body = document.getElementById('body-' + i);
+    const icon = document.getElementById('icon-' + i);
+    body.classList.toggle('open');
+    icon.textContent = body.classList.contains('open') ? '▲' : '▼';
+  }
+
+  function showGAS() {
+    const subject = document.getElementById('subject').value;
+    const body = document.getElementById('body').value;
+    const emailCol = headers.findIndex(h => /mail|email|メール/i.test(h));
+    const emailColLetter = String.fromCharCode(65 + (emailCol >= 0 ? emailCol : 1));
+
+    const code = `// ===================================
+// 一括メール送信スクリプト（GAS）
+// ===================================
+// 使い方:
+// 1. スプレッドシートのA列〜に顧客データを入力
+//    1行目: ヘッダー（${headers.join(', ')}）
+// 2. この関数を実行する
+
+function sendBulkEmail() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+
+  // 送信確認
+  const count = data.length - 1;
+  if (!Browser.msgBox('確認', count + '件のメールを送信しますか？', Browser.Buttons.YES_NO)) return;
+
+  let sent = 0;
+  for (let i = 1; i < data.length; i++) {
+    const row = {};
+    headers.forEach((h, idx) => { row[h] = data[i][idx]; });
+
+    const to = row['${headers[emailCol >= 0 ? emailCol : 1]}'];
+    if (!to) continue;
+
+    const subject = applyTemplate(\`${subject.replace(/`/g, '\\`')}\`, row);
+    const body = applyTemplate(\`${body.replace(/`/g, '\\`')}\`, row);
+
+    try {
+      GmailApp.sendEmail(to, subject, body);
+      sent++;
+      Utilities.sleep(500); // 送信間隔
+    } catch(e) {
+      Logger.log('送信失敗: ' + to + ' - ' + e.message);
+    }
+  }
+
+  Browser.msgBox(sent + '件のメールを送信しました。');
+}
+
+function applyTemplate(template, row) {
+  return template.replace(/\\{\\{([^}]+)\\}\\}/g, (_, key) => row[key.trim()] || '');
+}`;
+
+    document.getElementById('gasCode').textContent = code;
+    document.getElementById('gasModal').classList.add('open');
+  }
+
+  function copyGAS() {
+    navigator.clipboard.writeText(document.getElementById('gasCode').textContent)
+      .then(() => alert('コードをコピーしました！'));
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+</script>
+</body>
+</html>
