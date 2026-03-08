@@ -1,1 +1,1709 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>株式会社ネクストビジョン | ITコンサルティング・業務改善</title>
+  <meta name="description" content="株式会社ネクストビジョンは、業務自動化・Web制作・AI活用支援を通じて、企業の成長と競争力強化を支援するITコンサルティング会社です。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    :root {
+      --navy:       #1a2b4a;
+      --navy-dark:  #111e35;
+      --navy-mid:   #243760;
+      --gold:       #c9a84c;
+      --gold-light: #e2c47a;
+      --gold-dark:  #a8852e;
+      --white:      #ffffff;
+      --off-white:  #f5f6f8;
+      --gray-light: #e8eaee;
+      --gray:       #8a919e;
+      --text:       #2d3748;
+      --text-light: #5a6272;
+      --font:       'Noto Sans JP', sans-serif;
+      --shadow-sm:  0 2px 8px rgba(26,43,74,0.08);
+      --shadow-md:  0 8px 32px rgba(26,43,74,0.12);
+      --shadow-lg:  0 20px 60px rgba(26,43,74,0.18);
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --transition: 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.85;
+      max-width: 640px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy-dark);
+      border-color: var(--gold);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--navy);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .btn-navy:hover {
+      background: var(--navy-mid);
+      border-color: var(--navy-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,43,74,0.3);
+    }
+
+    /* ===========================
+       HEADER / NAV
+    =========================== */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      padding: 20px 0;
+    }
+
+    #header.scrolled {
+      background: var(--navy-dark);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      padding: 12px 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .logo-main {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-sub {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      opacity: 0.75;
+      margin-top: 3px;
+    }
+
+    .logo-accent {
+      color: var(--gold);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .nav-cta {
+      margin-left: 12px;
+      padding: 10px 22px;
+      font-size: 0.85rem;
+    }
+
+    /* Hamburger — CSS only */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition);
+    }
+
+    .hamburger:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+      transform-origin: center;
+    }
+
+    /* Toggle trick using checkbox */
+    #nav-toggle {
+      display: none;
+    }
+
+    #nav-toggle:checked ~ .header-inner .hamburger span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    #nav-toggle:checked ~ .header-inner .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+    #nav-toggle:checked ~ .header-inner .hamburger span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    #nav-toggle:checked ~ .mobile-nav {
+      max-height: 400px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: var(--navy-dark);
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mobile-nav a {
+      display: block;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: var(--transition);
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--gold);
+    }
+
+    .mobile-nav .mobile-cta {
+      margin: 16px 24px;
+      text-align: center;
+      background: var(--gold);
+      color: var(--navy-dark);
+      border-radius: 50px;
+      font-weight: 700;
+      border-bottom: none;
+    }
+
+    .mobile-nav .mobile-cta:hover {
+      background: var(--gold-light);
+      color: var(--navy-dark);
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy-dark);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(36,55,96,0.9) 0%, transparent 70%),
+        linear-gradient(135deg, #0d1829 0%, #1a2b4a 50%, #243760 100%);
+    }
+
+    /* Geometric accent shapes */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      animation: rotateRing 30s linear infinite;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 50%;
+      bottom: -80px;
+      left: -80px;
+      animation: rotateRing 40s linear infinite reverse;
+    }
+
+    @keyframes rotateRing {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 120px 0 80px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title .highlight {
+      color: var(--gold);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold);
+      opacity: 0.4;
+      border-radius: 2px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 44px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .hero-stat {
+      padding: 20px 40px 20px 0;
+      margin-right: 40px;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-stat:last-child {
+      border-right: none;
+      margin-right: 0;
+    }
+
+    .hero-stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-num span {
+      color: var(--gold);
+    }
+
+    .hero-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
+    }
+
+    /* Hero scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===========================
+       ABOUT
+    =========================== */
+    #about {
+      padding: 120px 0;
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card-stack {
+      position: relative;
+      height: 420px;
+    }
+
+    .about-card {
+      position: absolute;
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      color: var(--white);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-card-main {
+      width: 100%;
+      max-width: 340px;
+      top: 0;
+      left: 0;
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy-dark));
+      z-index: 2;
+    }
+
+    .about-card-accent {
+      width: 220px;
+      bottom: 20px;
+      right: 0;
+      background: var(--gold);
+      color: var(--navy-dark);
+      z-index: 3;
+      padding: 24px 28px;
+    }
+
+    .about-card-bg {
+      width: 240px;
+      top: 30px;
+      right: 10px;
+      height: 200px;
+      background: var(--off-white);
+      border: 2px solid var(--gray-light);
+      z-index: 1;
+      border-radius: var(--radius-md);
+    }
+
+    .about-card-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(201,168,76,0.15);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .about-card-main h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .about-card-main p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+
+    .about-card-accent h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      color: var(--navy-dark);
+    }
+
+    .about-card-accent .big-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--navy-dark);
+      line-height: 1;
+    }
+
+    .about-card-accent .big-num sup {
+      font-size: 1rem;
+      vertical-align: super;
+    }
+
+    .about-content .section-body {
+      max-width: 100%;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px;
+      background: var(--off-white);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--gold);
+      transition: var(--transition);
+    }
+
+    .about-feature:hover {
+      background: var(--white);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .about-feature-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .about-feature h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .about-feature p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ===========================
+       SERVICES
+    =========================== */
+    #services {
+      padding: 120px 0;
+      background: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #services::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .services-header .section-body {
+      margin: 0 auto;
+      text-align: left;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--gray-light);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-num {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--gray-light);
+      line-height: 1;
+      margin-bottom: 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .service-icon-wrap {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.6rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      line-height: 1.35;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .service-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: rgba(26,43,74,0.06);
+      padding: 4px 12px;
+      border-radius: 50px;
+      letter-spacing: 0.03em;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-top: 24px;
+      transition: var(--transition);
+    }
+
+    .service-link:hover {
+      gap: 10px;
+      color: var(--navy);
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform var(--transition);
+    }
+
+    .service-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* ===========================
+       COMPANY INFO
+    =========================== */
+    #company {
+      padding: 120px 0;
+      background: var(--white);
+    }
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .company-intro .section-body {
+      max-width: 100%;
+    }
+
+    .company-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-top: 28px;
+    }
+
+    .company-badge::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .company-table-wrap {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    }
+
+    thead th {
+      padding: 18px 28px;
+      text-align: left;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.08em;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--gray-light);
+      transition: background var(--transition);
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: rgba(26,43,74,0.025);
+    }
+
+    tbody td {
+      padding: 18px 28px;
+      font-size: 0.9rem;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    tbody td:first-child {
+      font-weight: 700;
+      color: var(--navy);
+      width: 36%;
+      border-right: 1px solid var(--gray-light);
+      background: rgba(245,246,248,0.5);
+    }
+
+    tbody td:last-child {
+      color: var(--text);
+    }
+
+    /* ===========================
+       CTA BANNER
+    =========================== */
+    #contact {
+      padding: 0;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 60%, #2d4a82 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 50%;
+      top: 50%;
+      right: -300px;
+      transform: translateY(-50%);
+    }
+
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .cta-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .cta-text h2 span {
+      color: var(--gold);
+    }
+
+    .cta-text p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .cta-actions .btn {
+      width: 100%;
+      justify-content: center;
+      min-width: 220px;
+    }
+
+    .cta-tel {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.78rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .cta-tel strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--navy-dark);
+      padding: 72px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 20px;
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      max-width: 280px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+    }
+
+    .footer-col h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 8px;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.5);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-col ul li a::before {
+      content: '›';
+      color: var(--gold);
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--gold);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover {
+      color: var(--gold);
+    }
+
+    /* ===========================
+       SCROLL ANIMATIONS
+    =========================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .about-grid,
+      .company-grid {
+        grid-template-columns: 1fr;
+        gap: 52px;
+      }
+
+      .about-card-stack {
+        height: 300px;
+        max-width: 480px;
+      }
+
+      .about-card-main {
+        max-width: 280px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .cta-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .cta-actions .btn {
+        width: auto;
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-nav {
+        display: flex;
+      }
+
+      #header {
+        flex-wrap: wrap;
+        padding: 16px 0;
+      }
+
+      .header-inner {
+        flex-wrap: nowrap;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .hero-stat {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding: 0 0 16px;
+        margin-right: 0;
+      }
+
+      .hero-stat:last-child {
+        border-bottom: none;
+      }
+
+      .about-features {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .about-card-stack {
+        display: none;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cta-actions .btn {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      #about,
+      #services,
+      #company {
+        padding: 80px 0;
+      }
+
+      .cta-banner {
+        padding: 72px 0;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header id="header">
+    <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+    <div class="container">
+      <div class="header-inner">
+        <a href="#" class="logo" aria-label="株式会社ネクストビジョン ホーム">
+          <span class="logo-main">
+            <span class="logo-accent">NEXT</span>VISION
+          </span>
+          <span class="logo-sub">株式会社ネクストビジョン</span>
+        </a>
+
+        <nav role="navigation" aria-label="メインナビゲーション">
+          <ul class="nav-links">
+            <li><a href="#about">会社について</a></li>
+            <li><a href="#services">サービス</a></li>
+            <li><a href="#company">会社概要</a></li>
+          </ul>
+          <a href="#contact" class="btn btn-primary nav-cta">お問い合わせ</a>
+        </nav>
+
+        <label for="nav-toggle" class="hamburger" aria-label="メニューを開く" role="button" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+    </div>
+    <nav class="mobile-nav" aria-label="モバイルナビゲーション">
+      <a href="#about">会社について</a>
+      <a href="#services">サービス</a>
+      <a href="#company">会社概要</a>
+      <a href="#contact" class="mobile-cta">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero" aria-label="ヒーローセクション">
+      <div class="hero-bg"></div>
+      <div class="hero-grid-overlay"></div>
+
+      <div class="container hero-content">
+        <p class="hero-eyebrow">IT Consulting &amp; Business Improvement</p>
+        <h1 class="hero-title">
+          ビジネスの<span class="highlight">次のステージ</span>へ。<br />
+          テクノロジーで<br />
+          可能性を広げる。
+        </h1>
+        <p class="hero-subtitle">
+          株式会社ネクストビジョンは、業務自動化・Web制作・AI活用支援を通じて、
+          企業の生産性向上と持続的な成長をサポートします。
+        </p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">サービスを見る <span class="arrow">→</span></a>
+          <a href="#contact" class="btn btn-outline">無料相談はこちら</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">150<span>+</span></div>
+            <div class="hero-stat-label">支援実績</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">98<span>%</span></div>
+            <div class="hero-stat-label">顧客満足度</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">10<span>年</span></div>
+            <div class="hero-stat-label">業界経験</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">SCROLL</div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+
+          <div class="about-visual fade-up">
+            <div class="about-card-stack">
+              <div class="about-card about-card-bg"></div>
+              <div class="about-card about-card-main">
+                <div class="about-card-icon">💡</div>
+                <h3>戦略的なITコンサルティング</h3>
+                <p>お客様のビジネス課題を深く理解し、最適なテクノロジーソリューションを設計・実装します。</p>
+              </div>
+              <div class="about-card about-card-accent">
+                <h4>平均 ROI 改善率</h4>
+                <div class="big-num">3<sup>×</sup></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-content fade-up delay-1">
+            <span class="section-label">About Us</span>
+            <h2 class="section-title" id="about-heading">
+              「変革」を<br />
+              共に創り上げる。
+            </h2>
+            <p class="section-body">
+              ネクストビジョンは2014年の設立以来、中小企業から大手企業まで、幅広いクライアントのデジタルトランスフォーメーションを支援してきました。
+              私たちの強みは、最新技術の知見と、現場に寄り添ったコンサルティングを組み合わせた実践的なアプローチです。
+            </p>
+
+            <div class="about-features">
+              <div class="about-feature">
+                <div class="about-feature-icon">🎯</div>
+                <div>
+                  <h4>目標達成型の支援</h4>
+                  <p>KPIを明確に設定し、結果にコミットします。</p>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="about-feature-icon">🔧</div>
+                <div>
+                  <h4>ワンストップ対応</h4>
+                  <p>戦略立案から実装まで一貫してサポート。</p>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="about-feature-icon">🤝</div>
+                <div>
+                  <h4>長期パートナーシップ</h4>
+                  <p>導入後のフォローアップも万全の体制です。</p>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="about-feature-icon">⚡</div>
+                <div>
+                  <h4>スピード感ある実行</h4>
+                  <p>アジャイルな手法で素早く価値を提供します。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="services-header fade-up">
+          <span class="section-label">Our Services</span>
+          <h2 class="section-title" id="services-heading">
+            ビジネス成長を加速させる<br />3つのサービス
+          </h2>
+          <p class="section-body">
+            テクノロジーを最大限に活用し、貴社の課題解決と成長を力強くサポートします。
+          </p>
+        </div>
+
+        <div class="services-grid">
+
+          <!-- Service 1 -->
+          <article class="service-card fade-up delay-1" aria-label="業務自動化コンサルティング">
+            <div class="service-num">01</div>
+            <div class="service-icon-wrap" aria-hidden="true">⚙️</div>
+            <h3>業務自動化<br />コンサルティング</h3>
+            <p>
+              手作業や非効率なフローを分析し、RPAやワークフロー自動化ツールを活用して業務プロセスを最適化。
+              人的リソースをコア業務へシフトし、コスト削減と生産性向上を同時に実現します。
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">RPA</span>
+              <span class="service-tag">プロセス最適化</span>
+              <span class="service-tag">コスト削減</span>
+            </div>
+            <a href="#contact" class="service-link">詳しく見る <span class="arrow">→</span></a>
+          </article>
+
+          <!-- Service 2 -->
+          <article class="service-card fade-up delay-2" aria-label="Webサイト制作">
+            <div class="service-num">02</div>
+            <div class="service-icon-wrap" aria-hidden="true">🌐</div>
+            <h3>Webサイト制作</h3>
+            <p>
+              ブランド価値を高めるデザインと、成果につながる導線設計を両立したWebサイトを制作。
+              SEO対策・レスポンシブ対応・高速表示を標準装備し、集客力と転換率を向上させます。
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">コーポレートサイト</span>
+              <span class="service-tag">SEO</span>
+              <span class="service-tag">CMS構築</span>
+            </div>
+            <a href="#contact" class="service-link">詳しく見る <span class="arrow">→</span></a>
+          </article>
+
+          <!-- Service 3 -->
+          <article class="service-card fade-up delay-3" aria-label="AI活用支援">
+            <div class="service-num">03</div>
+            <div class="service-icon-wrap" aria-hidden="true">🤖</div>
+            <h3>AI活用支援</h3>
+            <p>
+              生成AIや機械学習技術をビジネスに組み込み、意思決定の高速化・顧客体験の向上・
+              新サービス開発を支援。社内向けAIツール導入から活用研修まで包括的にサポートします。
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">生成AI</span>
+              <span class="service-tag">チャットボット</span>
+              <span class="service-tag">データ分析</span>
+            </div>
+            <a href="#contact" class="service-link">詳しく見る <span class="arrow">→</span></a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPANY INFO ===== -->
+    <section id="company" aria-labelledby="company-heading">
+      <div class="container">
+        <div class="company-grid">
+
+          <div class="company-intro fade-up">
+            <span class="section-label">Company Info</span>
+            <h2 class="section-title" id="company-heading">会社概要</h2>
+            <p class="section-body">
+              私たちは誠実さと技術力を柱に、クライアントとの信頼関係を大切にしながら、
+              日本企業のデジタル変革を推進しています。
+            </p>
+            <div class="company-badge">東京都新宿区を拠点に全国対応</div>
+          </div>
+
+          <div class="company-table-wrap fade-up delay-1">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2">基本情報</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>会社名</td>
+                  <td>株式会社ネクストビジョン</td>
+                </tr>
+                <tr>
+                  <td>英語表記</td>
+                  <td>NextVision Inc.</td>
+                </tr>
+                <tr>
+                  <td>設立</td>
+                  <td>2014年4月1日</td>
+                </tr>
+                <tr>
+                  <td>資本金</td>
+                  <td>3,000万円</td>
+                </tr>
+                <tr>
+                  <td>代表取締役</td>
+                  <td>山田 健太郎</td>
+                </tr>
+                <tr>
+                  <td>従業員数</td>
+                  <td>42名（2025年4月現在）</td>
+                </tr>
+                <tr>
+                  <td>所在地</td>
+                  <td>〒160-0023<br />東京都新宿区西新宿2-1-1 新宿ビル12F</td>
+                </tr>
+                <tr>
+                  <td>事業内容</td>
+                  <td>ITコンサルティング、業務改善支援、Web制作、AI活用支援</td>
+                </tr>
+                <tr>
+                  <td>主要取引先</td>
+                  <td>製造業・小売業・金融機関・医療機関など</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section id="contact" aria-labelledby="cta-heading">
+      <div class="cta-banner">
+        <div class="container">
+          <div class="cta-inner">
+            <div class="cta-text fade-up">
+              <h2 id="cta-heading">
+                まずは<span>無料相談</span>から<br />
+                はじめてみませんか？
+              </h2>
+              <p>
+                貴社の課題やお悩みをお聞かせください。経験豊富なコンサルタントが、
+                最適な解決策をご提案します。初回相談は完全無料です。
+              </p>
+            </div>
+            <div class="cta-actions fade-up delay-1">
+              <a href="mailto:info@nextvision.co.jp" class="btn btn-primary">
+                メールで相談する <span class="arrow">→</span>
+              </a>
+              <a href="tel:0120-000-000" class="btn btn-outline">
+                電話で相談する
+              </a>
+              <p class="cta-tel">
+                受付時間 平日 9:00〜18:00
+                <strong>0120-000-000</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="#" class="logo" aria-label="株式会社ネクストビジョン ホーム">
+            <span class="logo-main">
+              <span class="logo-accent">NEXT</span>VISION
+            </span>
+            <span class="logo-sub">株式会社ネクストビジョン</span>
+          </a>
+          <p class="footer-desc">
+            テクノロジーと人の力を掛け合わせ、企業の「次のビジョン」を実現するITコンサルティングパートナーです。
+          </p>
+          <div class="footer-social" aria-label="ソーシャルメディア">
+            <a href="#" class="social-link" aria-label="X（旧Twitter）">𝕏</a>
+            <a href="#" class="social-link" aria-label="Facebook">f</a>
+            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-link" aria-label="note">n</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="#services">業務自動化コンサルティング</a></li>
+            <li><a href="#services">Webサイト制作</a></li>
+            <li><a href="#services">AI活用支援</a></li>
+            <li><a href="#services">ITインフラ構築</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>会社情報</h4>
+          <ul>
+            <li><a href="#about">会社について</a></li>
+            <li><a href="#company">会社概要</a></li>
+            <li><a href="#">代表メッセージ</a></li>
+            <li><a href="#">採用情報</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="#contact">無料相談のお申し込み</a></li>
+            <li><a href="mailto:info@nextvision.co.jp">info@nextvision.co.jp</a></li>
+            <li><a href="tel:0120-000-000">0120-000-000</a></li>
+            <li><a href="#">アクセスマップ</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; 2025 株式会社ネクストビジョン. All Rights Reserved.
+        </p>
+        <nav class="footer-legal" aria-label="法的情報">
+          <a href="#">プライバシーポリシー</a>
+          <a href="#">特定商取引法</a>
+          <a href="#">サイトマップ</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JS: Scroll Effects ===== -->
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    const onScroll = () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Fade-up on scroll (Intersection Observer)
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Close mobile nav when a link is clicked
+    const navToggle = document.getElementById('nav-toggle');
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.checked = false;
+      });
+    });
+  </script>
+
+</body>
+</html>
