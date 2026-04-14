@@ -101,78 +101,89 @@
         <p class="section__sub">実際に動くものを作る</p>
       </div>
 
-      <div class="projects">
-        <article class="project project--featured reveal">
-          <div class="project__content">
-            <div class="project__tags">
-              <span class="tag">AI</span>
-              <span class="tag">Web3</span>
-              <span class="tag">TypeScript</span>
+      <!-- ai-api: full-width hero card with image -->
+      <article class="pcard pcard--hero pcard--green reveal">
+        <img src="img/proj-api.svg" alt="" class="pcard__img" loading="lazy">
+        <div class="pcard__body">
+          <div class="pcard__tags">
+            <span class="tag tag--green">AI</span>
+            <span class="tag tag--green">Web3</span>
+            <span class="tag tag--green">TypeScript</span>
+          </div>
+          <h3 class="pcard__title">ai-api</h3>
+          <p class="pcard__desc">AIエージェント向けの従量課金API。Web抽出、金融データ、天気、ニュース、ジオコーディング — x402プロトコルでUSDC決済。APIキー不要。</p>
+          <a href="https://github.com/0xatsupon/ai-api" class="pcard__link pcard__link--green" target="_blank" rel="noopener">ソースコード →</a>
+        </div>
+      </article>
+
+      <!-- LP Monitor + Sui Dev Hub: side by side, different styles -->
+      <div class="pcard-row">
+        <article class="pcard pcard--amber reveal">
+          <img src="img/proj-lp.svg" alt="" class="pcard__img" loading="lazy">
+          <div class="pcard__body">
+            <div class="pcard__tags">
+              <span class="tag tag--amber">DeFi</span>
+              <span class="tag tag--amber">Monitoring</span>
             </div>
-            <h3 class="project__title">ai-api</h3>
-            <p class="project__desc">AIエージェント向けの従量課金API。Web抽出、金融データ、天気、ニュース、ジオコーディング — x402プロトコルでUSDC決済。APIキー不要。</p>
-            <a href="https://github.com/0xatsupon/ai-api" class="project__link" target="_blank" rel="noopener">ソースコード →</a>
+            <h3 class="pcard__title">LP Monitor</h3>
+            <p class="pcard__desc">USDC/JPYCポジションのDiscord自動アラート。Chainlinkオラクルでレンジ逸脱を検知。</p>
+            <a href="https://github.com/0xatsupon/lp-monitor" class="pcard__link pcard__link--amber" target="_blank" rel="noopener">ソースコード →</a>
           </div>
         </article>
 
-        <article class="project reveal">
-          <div class="project__content">
-            <div class="project__tags">
-              <span class="tag">DeFi</span>
-              <span class="tag">Sui</span>
-              <span class="tag">Move</span>
+        <article class="pcard pcard--blue reveal">
+          <div class="pcard__body">
+            <div class="pcard__tags">
+              <span class="tag tag--blue">DeFi</span>
+              <span class="tag tag--blue">Sui</span>
+              <span class="tag tag--blue">Move</span>
             </div>
-            <h3 class="project__title">Sui Dev Hub</h3>
-            <p class="project__desc">Sui上の分散型コンテンツプラットフォーム。オンチェーン公開、SUIで直接チップ。仲介なし。</p>
-            <a href="https://github.com/0xatsupon/sui-dev-hub" class="project__link" target="_blank" rel="noopener">ソースコード →</a>
+            <h3 class="pcard__title">Sui Dev Hub</h3>
+            <p class="pcard__desc">Sui上の分散型コンテンツプラットフォーム。オンチェーン公開、SUIで直接チップ。仲介なし。</p>
+            <a href="https://github.com/0xatsupon/sui-dev-hub" class="pcard__link pcard__link--blue" target="_blank" rel="noopener">ソースコード →</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- AI Ace Attorney: wide card with chat visual -->
+      <article class="pcard pcard--wide pcard--purple reveal">
+        <div class="pcard__body">
+          <div class="pcard__tags">
+            <span class="tag tag--purple">AI</span>
+            <span class="tag tag--purple">Game</span>
+          </div>
+          <h3 class="pcard__title">AI Ace Attorney</h3>
+          <p class="pcard__desc">Claude搭載の法廷ドラマゲーム。AI証人に自由形式で質問する。選択肢なし、会話型推理。</p>
+          <span class="pcard__status">開発中</span>
+        </div>
+        <img src="img/proj-attorney.svg" alt="" class="pcard__img-side" loading="lazy">
+      </article>
+
+      <!-- AI Companion + Dungeon Architect: side by side -->
+      <div class="pcard-row">
+        <article class="pcard pcard--cyan reveal">
+          <img src="img/proj-companion.svg" alt="" class="pcard__img" loading="lazy">
+          <div class="pcard__body">
+            <div class="pcard__tags">
+              <span class="tag tag--cyan">AI</span>
+              <span class="tag tag--cyan">Vision</span>
+            </div>
+            <h3 class="pcard__title">AI Companion</h3>
+            <p class="pcard__desc">画面を見て喋る環境AI。Claude Vision + VOICEVOXで、常にそばにいるデジタルコンパニオン。</p>
+            <span class="pcard__status">開発中</span>
           </div>
         </article>
 
-        <article class="project reveal">
-          <div class="project__content">
-            <div class="project__tags">
-              <span class="tag">DeFi</span>
-              <span class="tag">Monitoring</span>
+        <article class="pcard pcard--lime reveal">
+          <img src="img/proj-dungeon.svg" alt="" class="pcard__img" loading="lazy">
+          <div class="pcard__body">
+            <div class="pcard__tags">
+              <span class="tag tag--lime">Education</span>
+              <span class="tag tag--lime">Sui</span>
             </div>
-            <h3 class="project__title">LP Monitor</h3>
-            <p class="project__desc">USDC/JPYCポジションのDiscord自動アラート。Chainlinkオラクルでレンジ逸脱を検知。</p>
-            <a href="https://github.com/0xatsupon/lp-monitor" class="project__link" target="_blank" rel="noopener">ソースコード →</a>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="project__content">
-            <div class="project__tags">
-              <span class="tag">AI</span>
-              <span class="tag">Game</span>
-            </div>
-            <h3 class="project__title">AI Ace Attorney</h3>
-            <p class="project__desc">Claude搭載の法廷ドラマゲーム。AI証人に自由形式で質問する。選択肢なし、会話型推理。</p>
-            <span class="project__status">開発中</span>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="project__content">
-            <div class="project__tags">
-              <span class="tag">AI</span>
-              <span class="tag">Vision</span>
-            </div>
-            <h3 class="project__title">AI Companion</h3>
-            <p class="project__desc">画面を見て喋る環境AI。Claude Vision + VOICEVOXで、常にそばにいるデジタルコンパニオン。</p>
-            <span class="project__status">開発中</span>
-          </div>
-        </article>
-
-        <article class="project reveal">
-          <div class="project__content">
-            <div class="project__tags">
-              <span class="tag">Education</span>
-              <span class="tag">Sui</span>
-            </div>
-            <h3 class="project__title">Dungeon Architect</h3>
-            <p class="project__desc">ダンジョン防衛をコーディングしてMove言語を学ぶ。ゲームで覚えるSui開発。</p>
-            <span class="project__status">開発中</span>
+            <h3 class="pcard__title">Dungeon Architect</h3>
+            <p class="pcard__desc">ダンジョン防衛をコーディングしてMove言語を学ぶ。ゲームで覚えるSui開発。</p>
+            <span class="pcard__status">開発中</span>
           </div>
         </article>
       </div>
