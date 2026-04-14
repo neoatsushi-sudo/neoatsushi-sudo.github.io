@@ -7,18 +7,12 @@
   <meta name="description" content="人工知能、分散型金融、自律エージェントの交差点で構築する。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 </head>
 <body>
-  <!-- Noise texture overlay -->
   <div class="noise" aria-hidden="true"></div>
-
-  <!-- Gradient orbs (decorative) -->
-  <div class="orb orb--1" aria-hidden="true"></div>
-  <div class="orb orb--2" aria-hidden="true"></div>
-  <div class="orb orb--3" aria-hidden="true"></div>
 
   <!-- Navigation -->
   <nav class="nav">
@@ -27,9 +21,10 @@
       <span class="nav__logo-text">0xatsupon</span>
     </a>
     <div class="nav__links">
+      <a href="#domains" class="nav__link">領域</a>
       <a href="#work" class="nav__link">プロジェクト</a>
+      <a href="#experience" class="nav__link">経験</a>
       <a href="#research" class="nav__link">研究</a>
-      <a href="#about" class="nav__link">About</a>
       <a href="https://github.com/0xatsupon" class="nav__link nav__link--external" target="_blank" rel="noopener">GitHub</a>
     </div>
     <button class="nav__menu" aria-label="Menu" aria-expanded="false">
@@ -40,166 +35,174 @@
 
   <!-- Mobile menu -->
   <div class="mobile-menu" aria-hidden="true">
+    <a href="#domains" class="mobile-menu__link">領域</a>
     <a href="#work" class="mobile-menu__link">プロジェクト</a>
+    <a href="#experience" class="mobile-menu__link">経験</a>
     <a href="#research" class="mobile-menu__link">研究</a>
-    <a href="#about" class="mobile-menu__link">About</a>
     <a href="https://github.com/0xatsupon" class="mobile-menu__link" target="_blank" rel="noopener">GitHub</a>
   </div>
 
   <!-- Hero -->
   <header class="hero">
     <div class="hero__container">
-      <p class="hero__label reveal">AI × DeFi × Research</p>
       <h1 class="hero__title reveal">
-        考え、取引し、学ぶ<br>
-        <span class="hero__title--accent">システムを構築する</span>
+        <span class="hero__title-line">考え、取引し、学ぶ</span>
+        <span class="hero__title-line hero__title--accent">システムを構築する</span>
       </h1>
       <p class="hero__subtitle reveal">
-        人工知能と分散型金融の交差点で活動するフルスタックエンジニア兼リサーチャー。
-        学術的な知見をプロダクションシステムに変換する。
+        AIと分散型金融の交差点で、<br class="hide-mobile">
+        学術的な知見をプロダクションに変える。
       </p>
       <div class="hero__cta reveal">
         <a href="#work" class="btn btn--primary">プロジェクトを見る</a>
-        <a href="https://github.com/0xatsupon" class="btn btn--ghost" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          GitHub
-        </a>
+        <a href="https://github.com/0xatsupon" class="btn btn--ghost" target="_blank" rel="noopener">GitHub</a>
       </div>
-    </div>
-    <div class="hero__scroll reveal">
-      <span>スクロール</span>
-      <div class="hero__scroll-line"></div>
     </div>
   </header>
 
-  <!-- Domains -->
-  <section class="domains">
+  <!-- Domains — Bento Grid -->
+  <section class="domains" id="domains">
     <div class="container">
-      <div class="domains__grid">
-        <div class="domain-card reveal">
-          <div class="domain-card__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/><path d="M8.24 4.35A4 4 0 0 1 12 2"/><circle cx="12" cy="12" r="2"/><path d="M16 20c0-2.76-1.79-5-4-5s-4 2.24-4 5"/><path d="M12 12v3"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
-          </div>
-          <h3 class="domain-card__title">人工知能</h3>
-          <p class="domain-card__text">LLM駆動の自律エージェント、ビジョンシステム、インタラクティブAIアプリケーション。推論し、観察し、行動するツールを構築。</p>
+      <div class="bento">
+        <div class="bento__main reveal">
+          <span class="bento__label">AI</span>
+          <h2 class="bento__title">自分で考えて<br>動くAIを作る</h2>
+          <p class="bento__text">LLMエージェント、画面を見て喋るコンパニオン、自由質問で証人尋問する法廷ゲーム。「道具」ではなく「相棒」としてのAI。</p>
         </div>
-        <div class="domain-card reveal">
-          <div class="domain-card__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.34 6.34 2.83 2.83"/><path d="M2 12h4"/><path d="m6.34 17.66 2.83-2.83"/><path d="M12 18v4"/><path d="m17.66 17.66-2.83-2.83"/><path d="M18 12h4"/><path d="m17.66 6.34-2.83 2.83"/><circle cx="12" cy="12" r="4"/></svg>
-          </div>
-          <h3 class="domain-card__title">分散型金融</h3>
-          <p class="domain-card__text">集中流動性の最適化、LPモニタリング、SuiおよびEVMチェーン上のDeFiポートフォリオ管理。</p>
+        <div class="bento__side bento__side--top reveal">
+          <span class="bento__label">DeFi</span>
+          <h3 class="bento__side-title">オンチェーンで<br>流動性を回す</h3>
+          <p class="bento__text">レンジ幅の最適化、リバランス判断、ポジション監視。SuiとEVM上で実運用。</p>
         </div>
-        <div class="domain-card reveal">
-          <div class="domain-card__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="m9 10 2 2 4-4"/></svg>
-          </div>
-          <h3 class="domain-card__title">研究</h3>
-          <p class="domain-card__text">最適LPレンジ戦略、リバランストリガー、汎用人工知能の哲学に関する学術論文。</p>
+        <div class="bento__side bento__side--bottom reveal">
+          <span class="bento__label">Research</span>
+          <h3 class="bento__side-title">手を動かす前に<br>理論で詰める</h3>
+          <p class="bento__text">集中流動性の最適戦略、リバランスタイミング、AGIと欲望の哲学。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Work / Projects -->
+  <!-- Projects -->
   <section class="work" id="work">
     <div class="container">
-      <h2 class="section__label reveal">プロジェクト</h2>
-      <p class="section__heading reveal">実際に動くものを作る</p>
+      <div class="section-header reveal">
+        <h2 class="section__title">プロジェクト</h2>
+        <p class="section__sub">実際に動くものを作る</p>
+      </div>
 
       <div class="projects">
-        <!-- ai-api -->
-        <article class="project reveal">
-          <div class="project__meta">
-            <span class="project__tag">AI</span>
-            <span class="project__tag">Web3</span>
-            <span class="project__tag">TypeScript</span>
-          </div>
-          <h3 class="project__title">ai-api</h3>
-          <p class="project__desc">AIエージェント向けの従量課金API。Web抽出、金融データ、天気、ニュース、ジオコーディング — Base上のx402プロトコルでUSDC決済。APIキー不要、サブスク不要。</p>
-          <div class="project__links">
-            <a href="https://github.com/0xatsupon/ai-api" class="project__link" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              ソースコード
-            </a>
+        <article class="project project--featured reveal">
+          <div class="project__content">
+            <div class="project__tags">
+              <span class="tag">AI</span>
+              <span class="tag">Web3</span>
+              <span class="tag">TypeScript</span>
+            </div>
+            <h3 class="project__title">ai-api</h3>
+            <p class="project__desc">AIエージェント向けの従量課金API。Web抽出、金融データ、天気、ニュース、ジオコーディング — x402プロトコルでUSDC決済。APIキー不要。</p>
+            <a href="https://github.com/0xatsupon/ai-api" class="project__link" target="_blank" rel="noopener">ソースコード →</a>
           </div>
         </article>
 
-        <!-- sui-dev-hub -->
         <article class="project reveal">
-          <div class="project__meta">
-            <span class="project__tag">DeFi</span>
-            <span class="project__tag">Sui</span>
-            <span class="project__tag">Move</span>
-          </div>
-          <h3 class="project__title">Sui Dev Hub</h3>
-          <p class="project__desc">Suiブロックチェーン上の分散型コンテンツプラットフォーム。ライターはオンチェーンで公開、読者はSUIトークンで直接チップ — 仲介者なし、手数料なし。</p>
-          <div class="project__links">
-            <a href="https://github.com/0xatsupon/sui-dev-hub" class="project__link" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              ソースコード
-            </a>
+          <div class="project__content">
+            <div class="project__tags">
+              <span class="tag">DeFi</span>
+              <span class="tag">Sui</span>
+              <span class="tag">Move</span>
+            </div>
+            <h3 class="project__title">Sui Dev Hub</h3>
+            <p class="project__desc">Sui上の分散型コンテンツプラットフォーム。オンチェーン公開、SUIで直接チップ。仲介なし。</p>
+            <a href="https://github.com/0xatsupon/sui-dev-hub" class="project__link" target="_blank" rel="noopener">ソースコード →</a>
           </div>
         </article>
 
-        <!-- lp-monitor -->
         <article class="project reveal">
-          <div class="project__meta">
-            <span class="project__tag">DeFi</span>
-            <span class="project__tag">Monitoring</span>
-            <span class="project__tag">JavaScript</span>
-          </div>
-          <h3 class="project__title">LP Monitor</h3>
-          <p class="project__desc">USDC/JPYCの流動性ポジション向けDiscord自動アラート。Polygon上のChainlinkオラクル価格とLPレンジを比較し、リバランスが必要な時に通知。</p>
-          <div class="project__links">
-            <a href="https://github.com/0xatsupon/lp-monitor" class="project__link" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              ソースコード
-            </a>
+          <div class="project__content">
+            <div class="project__tags">
+              <span class="tag">DeFi</span>
+              <span class="tag">Monitoring</span>
+            </div>
+            <h3 class="project__title">LP Monitor</h3>
+            <p class="project__desc">USDC/JPYCポジションのDiscord自動アラート。Chainlinkオラクルでレンジ逸脱を検知。</p>
+            <a href="https://github.com/0xatsupon/lp-monitor" class="project__link" target="_blank" rel="noopener">ソースコード →</a>
           </div>
         </article>
 
-        <!-- ai-ace-attorney -->
         <article class="project reveal">
-          <div class="project__meta">
-            <span class="project__tag">AI</span>
-            <span class="project__tag">Game</span>
-            <span class="project__tag">TypeScript</span>
-          </div>
-          <h3 class="project__title">AI Ace Attorney</h3>
-          <p class="project__desc">Claude搭載のインタラクティブ法廷ドラマゲーム。AI生成の証人に自由形式で質問 — 選択肢なし、純粋な会話型推理。</p>
-          <div class="project__links">
-            <span class="project__link project__link--wip">開発中</span>
+          <div class="project__content">
+            <div class="project__tags">
+              <span class="tag">AI</span>
+              <span class="tag">Game</span>
+            </div>
+            <h3 class="project__title">AI Ace Attorney</h3>
+            <p class="project__desc">Claude搭載の法廷ドラマゲーム。AI証人に自由形式で質問する。選択肢なし、会話型推理。</p>
+            <span class="project__status">開発中</span>
           </div>
         </article>
 
-        <!-- ai-companion -->
         <article class="project reveal">
-          <div class="project__meta">
-            <span class="project__tag">AI</span>
-            <span class="project__tag">Vision</span>
-            <span class="project__tag">Python</span>
-          </div>
-          <h3 class="project__title">AI Companion</h3>
-          <p class="project__desc">Claudeのビジョン APIで画面を観察し、VOICEVOXで音声コメントを生成する環境AI。常にそばにいるデジタルコンパニオン。</p>
-          <div class="project__links">
-            <span class="project__link project__link--wip">開発中</span>
+          <div class="project__content">
+            <div class="project__tags">
+              <span class="tag">AI</span>
+              <span class="tag">Vision</span>
+            </div>
+            <h3 class="project__title">AI Companion</h3>
+            <p class="project__desc">画面を見て喋る環境AI。Claude Vision + VOICEVOXで、常にそばにいるデジタルコンパニオン。</p>
+            <span class="project__status">開発中</span>
           </div>
         </article>
 
-        <!-- learn-move-game -->
         <article class="project reveal">
-          <div class="project__meta">
-            <span class="project__tag">Education</span>
-            <span class="project__tag">Game</span>
-            <span class="project__tag">Sui</span>
-          </div>
-          <h3 class="project__title">Dungeon Architect</h3>
-          <p class="project__desc">ダンジョン防衛をコーディングしてMove言語を学ぶ。基本構文からスマートコントラクトまで、インタラクティブなゲームプレイでSui開発を習得。</p>
-          <div class="project__links">
-            <span class="project__link project__link--wip">開発中</span>
+          <div class="project__content">
+            <div class="project__tags">
+              <span class="tag">Education</span>
+              <span class="tag">Sui</span>
+            </div>
+            <h3 class="project__title">Dungeon Architect</h3>
+            <p class="project__desc">ダンジョン防衛をコーディングしてMove言語を学ぶ。ゲームで覚えるSui開発。</p>
+            <span class="project__status">開発中</span>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section__title">経験</h2>
+        <p class="section__sub">エンジニアリングで組織の課題を解く</p>
+      </div>
+
+      <div class="exp-grid">
+        <div class="exp-card reveal">
+          <div class="exp-card__header">
+            <span class="exp-card__role">社内エンジニア</span>
+            <span class="exp-card__period">Webホスティング企業</span>
+          </div>
+          <p class="exp-card__desc">非エンジニア組織にテクノロジーを導入し、業務フローを変える役割。開発だけでなく、「何を自動化すべきか」の設計から携わる。</p>
+          <div class="exp-items">
+            <div class="exp-item">
+              <h4 class="exp-item__title">業務自動化</h4>
+              <p class="exp-item__text">請求書PDF生成、売上グラフ自動作成、議事録変換、メール一括送信。手作業で数時間かかっていた業務をスクリプトに置き換え。</p>
+            </div>
+            <div class="exp-item">
+              <h4 class="exp-item__title">社内ツール開発</h4>
+              <p class="exp-item__text">顧客管理、タスク管理、社内向けWebアプリ。非エンジニアが日常的に使えるインターフェースを設計・実装。</p>
+            </div>
+            <div class="exp-item">
+              <h4 class="exp-item__title">AI活用の推進</h4>
+              <p class="exp-item__text">Claude Codeの社内勉強会を企画・実施。AI活用の仕組みづくりと、チームへのナレッジ共有。</p>
+            </div>
+            <div class="exp-item">
+              <h4 class="exp-item__title">Webサイト制作</h4>
+              <p class="exp-item__text">コーポレートサイト、LPの設計から実装まで。デザインから公開・運用までを一人で担当。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -207,65 +210,59 @@
   <!-- Research -->
   <section class="research" id="research">
     <div class="container">
-      <h2 class="section__label reveal">研究</h2>
-      <p class="section__heading reveal">論文 & ディープダイブ</p>
+      <div class="section-header reveal">
+        <h2 class="section__title">研究</h2>
+        <p class="section__sub">論文 & ディープダイブ</p>
+      </div>
 
       <div class="papers">
         <article class="paper reveal">
           <span class="paper__field">計量ファイナンス</span>
           <h3 class="paper__title">集中流動性における最適LPレンジ戦略</h3>
-          <p class="paper__abstract">Cartea et al.の理論フレームワークを拡張し、USDC/JPYCステーブルコインペアおよびSUI/NSボラタイルペアの最適レンジ幅を導出。実証ボラティリティデータを用いたモンテカルロシミュレーションで検証。</p>
+          <p class="paper__abstract">Cartea et al.の理論を拡張し、USDC/JPYCとSUI/NSの最適レンジ幅を導出。モンテカルロシミュレーションで検証。</p>
         </article>
         <article class="paper reveal">
           <span class="paper__field">計量ファイナンス</span>
           <h3 class="paper__title">ノートレードゾーン理論による最適リバランストリガー</h3>
-          <p class="paper__abstract">ガスコストと市場微細構造を組み込んだ、流動性ポジションのリバランスタイミング決定のための新しいフレームワークを提案。手数料ティア別の感度分析を含む。</p>
+          <p class="paper__abstract">ガスコストと市場微細構造を組み込んだリバランスタイミングのフレームワーク。手数料ティア別の感度分析。</p>
         </article>
         <article class="paper reveal">
           <span class="paper__field">AI哲学</span>
           <h3 class="paper__title">AGIに「欲望」は必要か？</h3>
-          <p class="paper__abstract">真の汎用人工知能には、最適化目標だけでなく内発的で快楽的価値を持つ駆動が必要だと論じる。本当に「望む」機械の道徳的含意を探る。</p>
+          <p class="paper__abstract">真のAGIには内発的な駆動が必要だと論じる。「望む」機械の道徳的含意を探る。</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- About / Stack -->
   <section class="about" id="about">
     <div class="container">
       <div class="about__grid">
-        <div class="about__text">
-          <h2 class="section__label reveal">About</h2>
-          <p class="section__heading reveal">システムで考えるエンジニア</p>
-          <div class="about__body reveal">
-            <p>AIと分散型金融の交差点で構築する — 自律エージェントとオンチェーン経済が出会う場所。暗号通貨で決済を受けるプロダクションAPIから、最適な流動性戦略に関する学術研究まで。</p>
-            <p>最も面白い問題は分野の境界にあると信じている。DeFiプロトコルにはML駆動のリスクモデルが必要。AIエージェントには経済的インセンティブが必要。ゲームでスマートコントラクト開発を教えられる。その点と点をつなぐ。</p>
-            <p>現在は自律エージェントインフラ、Suiエコシステム開発、そしてゲーム・コンパニオン・x402 APIといった型破りなインターフェースでAIをアクセシブルにすることに注力。</p>
-          </div>
+        <div class="about__text reveal">
+          <h2 class="section__title">About</h2>
+          <p class="about__lead">AIとDeFiの交差点で、自律エージェントとオンチェーン経済をつなぐ。プロダクションAPIから学術論文まで、分野の境界にある問題を解く。</p>
         </div>
         <div class="about__stack reveal">
-          <h3 class="about__stack-title">技術スタック</h3>
-          <div class="stack-grid">
-            <div class="stack-item">
-              <span class="stack-item__label">言語</span>
-              <span class="stack-item__value">TypeScript, Python, Move, Solidity</span>
-            </div>
-            <div class="stack-item">
-              <span class="stack-item__label">AI / ML</span>
-              <span class="stack-item__value">Claude API, Vision, Prompt Caching, MCP</span>
-            </div>
-            <div class="stack-item">
-              <span class="stack-item__label">ブロックチェーン</span>
-              <span class="stack-item__value">Sui, EVM, 集中流動性 (CLMM)</span>
-            </div>
-            <div class="stack-item">
-              <span class="stack-item__label">インフラ</span>
-              <span class="stack-item__value">Node.js, Vite, Discord Bot, Chainlink</span>
-            </div>
-            <div class="stack-item">
-              <span class="stack-item__label">研究</span>
-              <span class="stack-item__value">モンテカルロ, ボラティリティモデリング, ゲーム理論</span>
-            </div>
+          <div class="stack-row">
+            <span class="stack-label">言語</span>
+            <span class="stack-value">TypeScript, Python, Move, Solidity</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">AI / ML</span>
+            <span class="stack-value">Claude API, Vision, Prompt Caching, MCP</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">ブロックチェーン</span>
+            <span class="stack-value">Sui, EVM, 集中流動性 (CLMM)</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">インフラ</span>
+            <span class="stack-value">Node.js, Vite, Discord Bot, Chainlink</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">研究</span>
+            <span class="stack-value">モンテカルロ, ボラティリティモデリング, ゲーム理論</span>
           </div>
         </div>
       </div>
@@ -276,14 +273,8 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
-        <div class="footer__left">
-          <span class="footer__name">0xatsupon</span>
-          <span class="footer__sep">—</span>
-          <span class="footer__tagline">AI × DeFi × Research</span>
-        </div>
-        <div class="footer__links">
-          <a href="https://github.com/0xatsupon" class="footer__link" target="_blank" rel="noopener">GitHub</a>
-        </div>
+        <span class="footer__name">0xatsupon</span>
+        <a href="https://github.com/0xatsupon" class="footer__link" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </footer>
