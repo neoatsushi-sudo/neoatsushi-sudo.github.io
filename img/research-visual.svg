@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" fill="none">
+  <defs>
+    <linearGradient id="rg" x1="0" y1="100" x2="400" y2="100">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.05"/>
+      <stop offset="50%" stop-color="#818cf8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="#0f0f11"/>
+  <rect width="400" height="200" fill="url(#rg)"/>
+
+  <!-- Mathematical curves (normal distribution / bell curves) -->
+  <path d="M 0 170 Q 50 168 100 150 Q 140 120 170 70 Q 190 40 200 35 Q 210 40 230 70 Q 260 120 300 150 Q 350 168 400 170"
+        stroke="#6366f1" stroke-width="1" opacity="0.4"/>
+
+  <!-- Second curve (shifted) -->
+  <path d="M 0 175 Q 60 173 120 160 Q 160 135 185 95 Q 200 72 210 68 Q 220 72 240 100 Q 270 140 310 163 Q 360 175 400 176"
+        stroke="#818cf8" stroke-width="0.8" opacity="0.25" stroke-dasharray="4 2"/>
+
+  <!-- Sigma markers -->
+  <g opacity="0.15" stroke="#ffffff" stroke-width="0.5">
+    <line x1="200" y1="25" x2="200" y2="180"/>
+    <line x1="130" y1="30" x2="130" y2="180" stroke-dasharray="2 3"/>
+    <line x1="270" y1="30" x2="270" y2="180" stroke-dasharray="2 3"/>
+  </g>
+
+  <!-- Greek symbols -->
+  <text x="200" y="195" font-family="serif" font-size="10" fill="#818cf8" opacity="0.4" text-anchor="middle">μ</text>
+  <text x="130" y="195" font-family="serif" font-size="9" fill="#818cf8" opacity="0.3" text-anchor="middle">-σ</text>
+  <text x="270" y="195" font-family="serif" font-size="9" fill="#818cf8" opacity="0.3" text-anchor="middle">+σ</text>
+
+  <!-- Data points scattered -->
+  <g fill="#06b6d4" opacity="0.3">
+    <circle cx="145" cy="135" r="1.5"/>
+    <circle cx="165" cy="100" r="1.5"/>
+    <circle cx="180" cy="75" r="1.5"/>
+    <circle cx="195" cy="45" r="1.5"/>
+    <circle cx="205" cy="50" r="1.5"/>
+    <circle cx="220" cy="80" r="1.5"/>
+    <circle cx="240" cy="110" r="1.5"/>
+    <circle cx="260" cy="140" r="1.5"/>
+    <circle cx="155" cy="120" r="1"/>
+    <circle cx="190" cy="55" r="1"/>
+    <circle cx="215" cy="60" r="1"/>
+    <circle cx="250" cy="125" r="1"/>
+    <circle cx="175" cy="85" r="1.2"/>
+    <circle cx="230" cy="90" r="1.2"/>
+  </g>
+
+  <!-- Integral symbol area fill -->
+  <path d="M 130 150 Q 140 120 170 70 Q 190 40 200 35 Q 210 40 230 70 Q 260 120 270 150 Z"
+        fill="#6366f1" opacity="0.04"/>
+</svg>
