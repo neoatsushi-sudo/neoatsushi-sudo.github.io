@@ -178,7 +178,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 20%, var(--bg) 75%);
+  background: radial-gradient(ellipse at center, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.2) 25%, var(--bg) 70%);
   z-index: 1;
   pointer-events: none;
 }
@@ -206,6 +206,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   line-height: 1.05;
   letter-spacing: -0.04em;
   margin-bottom: 32px;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.8);
 }
 
 .hero__title-line {
@@ -225,6 +226,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   line-height: 1.7;
   margin-bottom: 48px;
   font-weight: 400;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
 }
 
 .hero__cta {
